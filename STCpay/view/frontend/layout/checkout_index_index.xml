@@ -18,7 +18,7 @@
                                                             <!-- merge payment method renders here -->
                                                             <item name="children" xsi:type="array">
                                                                 <item name="stcpay-payments" xsi:type="array">
-                                                                    <item name="component" xsi:type="string">Moyasar_STCpay/js/view/payment/stcpay</item>
+                                                                    <item name="component" xsi:type="string">Moyasar_STCpay/js/view/payment/STCpay</item>
                                                                     <item name="methods" xsi:type="array">
                                                                          <!--<item name="STCpay" xsi:type="array">
                                                                             <item name="isBillingAddressRequired" xsi:type="boolean">true</item>

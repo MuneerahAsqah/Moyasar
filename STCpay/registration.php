@@ -3,5 +3,4 @@
     \Magento\Framework\Component\ComponentRegistrar::MODULE,
     'Moyasar_STCpay',
     __DIR__
-  );
- 
+);

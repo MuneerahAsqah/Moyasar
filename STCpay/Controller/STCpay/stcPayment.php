@@ -40,33 +40,24 @@ class stcPayment extends use Magento\Framework\App\ActionInterface
     //$email = $order->getCustomerEmail();
     $mobile = $this->getRequest()->getPost('mobile');
 
-    $post_data = array(
-      'publishable_api_key' => $this->scopeConfig->get('publishable_api_key'),
-      'amount' => $amount * 100,
-      'currency' => 'SAR',
-      'description' => $email,
-      'source' => array(
-        'type' => 'stcpay',
-        'mobile' => $mobile)
+    $form_action_url = "https://api.moyasar.com/v1/payments";
+
+
+      $post_data = array(
+          'action' => $form_action_url,
+          'fields' => array (
+            'publishable_api_key' => $this->scopeConfig->get('publishable_api_key'),
+            'amount' => $amount * 100,
+            'currency' => 'SAR',
+            //'description' => $email,
+            'source' => array(
+              'type' => 'stcpay',
+              'mobile' => $mobile)
+          )
       );
 
-
-      $params = json_encode($post_data);
-
-      $url = "https://api.moyasar.com/v1/payments";
-
-      //$result = $this->resultJsonFactory->create();
-
-    try {
-
-      $this->client->setHeaders(['Content-Type' => 'application/json']);
-      $this->client->post($url,$params);
-
-    } catch(\Exception $e) {
-      throw new \Magento\Framework\Validator\Exception(__('Payment error.'));
-    }
-    //To return the data ..
-    //return $result->setData();
+      $result = $this->resultJsonFactory->create();
+      return $result->setData($post_data);
 
   }
 }
