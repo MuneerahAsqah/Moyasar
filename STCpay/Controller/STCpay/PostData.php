@@ -7,13 +7,16 @@ use Magento\Framework\App\Action\Context;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Sales\Model\Order;
 use Magento\Framework\App\ResponseInterface;
+use \Magento\Framework\App\Action\Action;
+use \Moyasar\STCpay\Helper\Data;
 
 
-class stcPayment extends use Magento\Framework\App\ActionInterface
+class PostData extends Action
 {
-  function __construct(
+
+  public function __construct(
     Context $context,
-    \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
+    Data $dataHelper, //to get the system.xml configuration data
     Session $checkoutSession,
     \Magento\Framework\UrlInterface $urlBuilder,
     \Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory,
@@ -21,8 +24,8 @@ class stcPayment extends use Magento\Framework\App\ActionInterface
     \Magento\Sales\Api\OrderRepositoryInterface $orderRepository,
     \Magento\Framework\HTTP\ClientInterface $client
     ) {
-      parent::__consrtuct($context);
-      $this->scopeConfig = $scopeConfig;
+      parent::__construct($context);
+      $this->dataHelper = $dataHelper;
       $this->checkoutSession = $checkoutSession;
       $this->urlBuilder = $urlBuilder;
       $this->resultJsonFactory = $resultJsonFactory;
@@ -36,17 +39,18 @@ class stcPayment extends use Magento\Framework\App\ActionInterface
     $qoute = $this->checkoutSession->getQoute();
     $qouteData = $qoute->getData();
 
-    $amount = $qoute->getGrandTotal();
+    $amount = $qouteData->getGrandTotal();
     //$email = $order->getCustomerEmail();
-    $mobile = $this->getRequest()->getPost('mobile');
+    //$mobile = $this->getRequest()->getPost('mobile');
 
     $form_action_url = "https://api.moyasar.com/v1/payments";
+    $publishable_api_key = $this->dataHelper->getConfig("payment/moyasar_stcpay/publishable_api_key"); //(section_id/group_id/field_id)
 
 
       $post_data = array(
           'action' => $form_action_url,
           'fields' => array (
-            'publishable_api_key' => $this->scopeConfig->get('publishable_api_key'),
+            'publishable_api_key' => $publishable_api_key,
             'amount' => $amount * 100,
             'currency' => 'SAR',
             //'description' => $email,

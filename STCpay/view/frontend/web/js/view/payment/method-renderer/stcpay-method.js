@@ -20,7 +20,7 @@ define(
             },
 
             afterPlaceOrder: function () {
-                var custom_controller_url = url.build('stcpayment/STCpay/stcPayment'); //custom controller url/frontName
+                var custom_controller_url = url.build('stcpayment/STCpay/PostData'); //custom controller url/frontName
                 $.post(custom_controller_url, 'json')
                 .done(function (response) {
                     customerData.invalidate(['cart']);
