@@ -3,7 +3,7 @@ namespace Moyasar\STCpay\Model\Payment;
 
 class STCpay extends \Magento\Payment\Model\Method\AbstractMethod
 {
-    const METHOD_CODE = 'STCpay';
+    const METHOD_CODE = 'stcpay';
     protected $_code = self::METHOD_CODE;
 
     protected $_isGateway = true;

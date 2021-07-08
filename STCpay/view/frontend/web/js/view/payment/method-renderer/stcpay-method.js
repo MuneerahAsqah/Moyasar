@@ -13,7 +13,7 @@ define(
         return Component.extend({
             redirectAfterPlaceOrder: false,
             defaults: {
-                template: 'Moyasar_STCpay/payment/STCpay'
+                template: 'Moyasar_STCpay/payment/stcpay'
             },
             getMailingAddress: function () {
                 return window.checkoutConfig.payment.checkmo.mailingAddress;

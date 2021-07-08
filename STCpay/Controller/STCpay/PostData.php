@@ -44,7 +44,7 @@ class PostData extends Action
     //$mobile = $this->getRequest()->getPost('mobile');
 
     $form_action_url = "https://api.moyasar.com/v1/payments";
-    $publishable_api_key = $this->dataHelper->getConfig("payment/moyasar_stcpay/publishable_api_key"); //(section_id/group_id/field_id)
+    $publishable_api_key = $this->dataHelper->getConfig("payment/stcpay/publishable_api_key"); //system.xml (section_id/group_id/field_id)
 
 
       $post_data = array(
