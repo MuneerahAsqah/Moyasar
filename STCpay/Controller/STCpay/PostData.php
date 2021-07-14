@@ -26,7 +26,7 @@ class PostData extends Action
     ) {
       parent::__construct($context);
       $this->dataHelper = $dataHelper;
-      $this->checkoutSession = $checkoutSession;
+      $this->_checkoutSession = $checkoutSession;
       $this->urlBuilder = $urlBuilder;
       $this->resultJsonFactory = $resultJsonFactory;
       $this->orderRepository = $orderRepository;
@@ -36,15 +36,14 @@ class PostData extends Action
   public function execute(){
 
     //getting the parameters
-    $qoute = $this->checkoutSession->getQoute();
-    $qouteData = $qoute->getData();
+    $order = $this->_checkoutSession->getLastRealOrder();
+    $amount = $order->getGrandTotal();
 
-    $amount = $qouteData->getGrandTotal();
     //$email = $order->getCustomerEmail();
-    //$mobile = $this->getRequest()->getPost('mobile');
+    $mobile = $this->getRequest()->getPost('mobile');
 
     $form_action_url = "https://api.moyasar.com/v1/payments";
-    $publishable_api_key = $this->dataHelper->getConfig("payment/stcpay/publishable_api_key"); //system.xml (section_id/group_id/field_id)
+    $publishable_api_key = $this->dataHelper->getConfig("payment/stcpayment/publishable_api_key"); //system.xml (section_id/group_id/field_id)
 
 
       $post_data = array(
@@ -56,7 +55,8 @@ class PostData extends Action
             //'description' => $email,
             'source' => array(
               'type' => 'stcpay',
-              'mobile' => $mobile)
+              'mobile' => $mobile
+            )
           )
       );
 
