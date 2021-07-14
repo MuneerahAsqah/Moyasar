@@ -17,7 +17,7 @@ define(
                 template: 'Moyasar_STCpay/payment/stcpay_template'
             },
             getMailingAddress: function() {
-
+              return window.checkoutConfig.payment.checkmo.mailingAddress;
             },
 
             afterPlaceOrder: function() {

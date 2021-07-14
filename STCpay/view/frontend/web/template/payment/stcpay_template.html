@@ -9,7 +9,7 @@
         </label>
     </div>
     <div class="payment-method-content">
-        <form class="form" data-bind="attr: {'id': getCode() + '-form'}">
+        <form class="form" method="post" data-bind="attr: {'id': getCode() + '-form'}">
           <label for="mobile">Enter your STC Mobile Number:</label>
           <br>
           <input type="number" name="mobile" id="mobile" placeholder="e.g. 0512345678" max="10" min="10"/>
