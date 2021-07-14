@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<configxmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+<eventname="sales_order_place_after">
+<observername="place_order_after" instance="Moyasar\STCpay\Observer\OrderdataObserver" />
+</event>
+</config>
